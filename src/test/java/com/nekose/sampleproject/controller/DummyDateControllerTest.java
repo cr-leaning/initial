@@ -6,6 +6,7 @@ import com.nekose.sampleproject.domain.model.entity.DummyData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -13,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -64,7 +66,10 @@ class DummyDateControllerTest {
                                 "}}")
                 ).andReturn();
 
-        verify(dummyApplication, times(1)).get(exceptedKey);
+        var captor = ArgumentCaptor.forClass(String.class);
+        verify(dummyApplication, times(1)).get(captor.capture());
+
+        assertEquals(exceptedKey, captor.getValue());
     }
 
 }

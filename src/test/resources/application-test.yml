@@ -20,8 +20,9 @@ management:
 
 ### spring
 spring:
-  profiles:
-    active: test
+#  profiles:
+#    active: test
+#    active: "local"
   flyway:
     enabled: true
     baseline-on-migrate: true
